@@ -13,7 +13,6 @@ Instrucciones para instalar tu proyecto. Por ejemplo:
 
 ```sh
 git clone https://github.com/rajnaroc/FLASK-MONGODB-RESTAPI
-cd FLASK-MONGODB-RESTAPI
 pip install -r requirements.txt
 
  
