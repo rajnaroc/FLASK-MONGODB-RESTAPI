@@ -34,5 +34,14 @@ def creat_user():
     else:
         return {"message" :"Faltan datos!"}
 
+@app.errorhandler(404)
+def not_found(error=None):
+    message = {
+        "message" : "Resouce not found" + request.url,
+        "status": 404
+    }
+    return message
+
+
 if __name__ == "__main__":
     app.run(debug=True)
