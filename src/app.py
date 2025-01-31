@@ -17,7 +17,7 @@ def creat_user():
     
     if username and email and password:
         hashed_password = generate_password_hash(password)
-        mongo.db.users.insert_one(
+        id = mongo.db.users.insert_one(
             {
                 "username": username,
                 "password": hashed_password,
@@ -25,7 +25,7 @@ def creat_user():
             }
         )
         response = {
-            "id": str(id),
+            "id":str(id),
             "username": username,
             "password": hashed_password,
             "email": email
