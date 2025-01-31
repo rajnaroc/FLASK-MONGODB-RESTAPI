@@ -1,6 +1,6 @@
 from flask import Flask, request
 from flask_pymongo import PyMongo
-
+from werkzeug.security import generate_password_hash
 
 
 app = Flask(__name__)
@@ -15,10 +15,24 @@ def creat_user():
     password = request.json['password']
     email = request.json['email']
     
-    print(username,password, email)
-
-    return {"mesage":"received"}
-
+    if username and email and password:
+        hashed_password = generate_password_hash(password)
+        mongo.db.users.insert_one(
+            {
+                "username": username,
+                "password": hashed_password,
+                "email": email
+            }
+        )
+        response = {
+            "id": str(id),
+            "username": username,
+            "password": hashed_password,
+            "email": email
+        }
+        return response
+    else:
+        return {"message" :"Faltan datos!"}
 
 if __name__ == "__main__":
     app.run(debug=True)
